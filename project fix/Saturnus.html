@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Saturnus</title>
+  <link rel="stylesheet" href="planetin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="home.html" class="navbar-item">HOME</a>
+        </div>
+        <div class="navbar-right">
+          <a href="planet.html" class="navbar-item">PLANET</a>
+          <a href="Revolusi.html" class="navbar-item">REVOLUSI</a>
+          <a href="Rotasi.html" class="navbar-item">ROTASI</a>
+          <a href="funfact.html" class="navbar-item">FUN FACT</a>
+          <a href="Kuis.html" class="navbar-item">QUIZ</a>
+          <a href="Tentang.html" class="navbar-item">TENTANG</a>
+        </div>
+    </nav>
+</header>
+  <div class="frame">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(30,window.innerWidth / window.innerHeight,0.8,300);
+
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth * 0.5 , 350);
+      document.querySelector('.frame').appendChild(renderer.domElement);
+
+      var geometry = new THREE.SphereGeometry(5, 32, 64);
+      var material = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load(
+          "https://upload.wikimedia.org/wikipedia/commons/1/1e/Solarsystemscope_texture_8k_saturn.jpg"
+        ),
+      });
+      var saturnus = new THREE.Mesh(geometry, material);
+      scene.add(saturnus);
+
+      var ringGeometry = new THREE.RingGeometry(6, 9, 64);
+      var ringMaterial = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load(
+          "https://upload.wikimedia.org/wikipedia/commons/1/1e/Solarsystemscope_texture_8k_saturn.jpg"
+        ),
+        side: THREE.DoubleSide,
+      });
+      var ring = new THREE.Mesh(ringGeometry, ringMaterial);
+      ring.rotation.x = Math.PI / 2;
+      ring.position.set(0, 0, 0); // Posisikan cincin di tengah planet
+      saturnus.add(ring);
+
+      camera.position.z = 30;
+
+      var animate = function () {
+        requestAnimationFrame(animate);
+        ringMaterial.map.offset.x += 0.1;
+        ringMaterial.map.repeat.set(1, 1);
+        saturnus.rotation.y += 0.01;
+        ring.rotation.x += 0.01;
+
+        renderer.render(scene, camera);
+      };
+
+      animate();
+    </script>
+
+  </div>
+  <div class="frame2">
+    <p class="title">SATURNUS</p>
+    <div class="subtitle">
+        <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Saturnus adalah planet keenam terdekat dari matahari. Planet Saturnus ini memiliki cincin sangat indah yang menjadikan ciri khas planet Saturnus. Jarak planet Saturnus ke matahari kurang lebih sekitar 1.426.666.422 km sedangkan jarak planet Saturnus ke Bumi sekitar 1.336.600.000 km. Planet Saturnus memiliki suhu rata-rata sekitar -140° C. Planet Saturnus ini memliki diameter 120.536 km. Planet Saturnus ini memiliki kandungan yang mirip dengan planet Jupiter. Sedangkan cincin pada planet Saturnus terdiri dari potongan komet, asteroid, bulan yang hancur dari proses gravitasi planet Saturnus serta es. Planet Saturnus ini memiliki 83 satelit.</p>
+    </div>
+  </div>
+</body>
+</html>
